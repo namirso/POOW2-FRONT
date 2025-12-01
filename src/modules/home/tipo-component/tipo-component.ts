@@ -4,19 +4,18 @@ import { Tipo } from '../../../core/models/tipo';
 import { TipoService } from '../../../core/services/tipo-service';
 import { CommonModule } from '@angular/common';
 
-// Imports do Material
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-// 1. ADICIONE O IMPORT DO SNACKBAR
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tipo',
   standalone: true,
-  // 2. ADICIONE O MODULO AQUI NOS IMPORTS
+
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -38,7 +37,7 @@ export class TipoComponent implements OnInit {
     private service: TipoService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
-    private snackBar: MatSnackBar // 3. INJETE O SNACKBAR AQUI
+    private snackBar: MatSnackBar
   ) {
     this.form = this.fb.group({
       id: [null],
@@ -77,7 +76,7 @@ export class TipoComponent implements OnInit {
     this.form.patchValue(tipo);
   }
 
-  // 4. AQUI ESTÁ A MÁGICA PARA O ERRO DE EXCLUSÃO
+
   deletar(id: number) {
     if(confirm('Tem certeza que deseja deletar este tipo?')) {
       this.service.excluir(id).subscribe({
@@ -87,7 +86,7 @@ export class TipoComponent implements OnInit {
         },
         error: (err) => {
           console.error(err);
-          // Mostra a mensagem específica de vínculo
+
           this.mostrarMensagem('Não é possível excluir! Existem Obras vinculadas a este Tipo.', true);
         }
       });
@@ -99,15 +98,13 @@ export class TipoComponent implements OnInit {
     this.editing = false;
   }
 
-  // Função auxiliar para mostrar o SnackBar bonito
+
   private mostrarMensagem(msg: string, isError: boolean) {
     this.snackBar.open(msg, 'Fechar', {
       duration: 5000, // Fica na tela por 5 segundos
       horizontalPosition: 'right',
       verticalPosition: 'top',
       panelClass: isError ? ['bg-danger', 'text-white'] : ['bg-success', 'text-white']
-      // Nota: As classes bg-danger/success dependem do Bootstrap ou CSS global.
-      // Se não tiver, ele vai aparecer cinza padrão, o que também funciona.
     });
   }
 }

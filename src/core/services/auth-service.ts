@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { env } from '../../environment/environment';
-import { TokenResponse } from '../models/usuario'; // Importe a interface nova
-import { tap } from 'rxjs'; // Importante para side-effects
+import { TokenResponse } from '../models/usuario';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

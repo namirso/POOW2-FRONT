@@ -18,11 +18,11 @@ import { Obra } from '../../../core/models/obra';
 })
 export class DashboardComponent implements OnInit {
 
-  // Listas reais
+
   recentReviews: Review[] = [];
   topObras: Obra[] = [];
 
-  // Cards de estatística (Iniciam zerados)
+
   stats = [
     { title: 'Total de Obras', value: '0', icon: 'movie', color: 'bg-primary' },
     { title: 'Reviews Feitas', value: '0', icon: 'star', color: 'bg-warning' },
@@ -42,7 +42,6 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarDados() {
-    // 1. Carregar Obras (Atualiza Card 1 e Lista Lateral)
     this.obraService.listar().subscribe({
       next: (obras) => {
         this.stats[0].value = obras.length.toString();
@@ -67,7 +66,7 @@ export class DashboardComponent implements OnInit {
         if (reviews.length > 0) {
           const somaNotas = reviews.reduce((acc, curr) => acc + curr.nota, 0);
           const media = somaNotas / reviews.length;
-          this.stats[3].value = media.toFixed(1); // Ex: 8.5
+          this.stats[3].value = media.toFixed(1);
         }
         this.csr.detectChanges();
       }

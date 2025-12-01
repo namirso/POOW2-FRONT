@@ -21,7 +21,7 @@ import { MatSelectModule } from '@angular/material/select'; // Para o dropdown
 export class ObraComponent implements OnInit {
   form: FormGroup;
   dados: Obra[] = [];
-  tipos: Tipo[] = []; // Lista para o select
+  tipos: Tipo[] = [];
   editing = false;
 
   constructor(
@@ -35,13 +35,13 @@ export class ObraComponent implements OnInit {
       id: [null],
       nome: ['', Validators.required],
       direcao: ['', Validators.required],
-      tipo: [null, Validators.required] // Objeto Tipo inteiro
+      tipo: [null, Validators.required]
     });
   }
 
   ngOnInit() {
     this.listarObras();
-    this.listarTipos(); // Carrega o dropdown
+    this.listarTipos();
   }
 
   listarObras() { this.service.listar().subscribe(res => {
@@ -59,8 +59,6 @@ export class ObraComponent implements OnInit {
 
   editar(obra: Obra) {
     this.editing = true;
-    // Atenção: para o select funcionar, o objeto 'tipo' tem que ser comparável.
-    // Se der problema no select não preencher, use [compareWith] no HTML.
     this.form.patchValue(obra);
   }
 
@@ -73,7 +71,7 @@ export class ObraComponent implements OnInit {
     this.editing = false;
   }
 
-  // Função auxiliar para comparar objetos no Select (se o select não selecionar ao editar, use isso)
+
   compareTipos(t1: Tipo, t2: Tipo): boolean {
     return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }

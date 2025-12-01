@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Usuario } from '../../../core/models/usuario';
 import { UsuarioService } from '../../../core/services/usuario-service';
 
-// Angular Material & Common
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -63,7 +63,7 @@ export class UsuarioComponent implements OnInit {
 
       this.usuarioService.create(usuario).subscribe({
         next: () => {
-          // Como o back retorna void, recarregamos a lista
+
           this.listar();
           this.resetForm();
         },
@@ -78,7 +78,7 @@ export class UsuarioComponent implements OnInit {
 
       this.usuarioService.update(usuario).subscribe({
         next: () => {
-          this.listar(); // Recarrega para garantir dados frescos
+          this.listar();
           this.resetForm();
         },
         error: (err) => console.error('Erro ao atualizar:', err)
@@ -100,18 +100,17 @@ export class UsuarioComponent implements OnInit {
     if(confirm(`Deseja deletar ${usuario.nome}?`)) {
       this.usuarioService.delete(usuario.id!).subscribe({
         next: () => {
-          this.listar(); // Recarrega a lista
+          this.listar();
         },
         error: (err) => console.error('Erro ao deletar:', err)
       });
     }
   }
 
-  // Protected para o HTML conseguir ler
+
   protected resetForm() {
     this.form.reset();
     this.editing = false;
-    // Define valores padrão se necessário
     this.form.patchValue({ senha: '123' });
   }
 }
