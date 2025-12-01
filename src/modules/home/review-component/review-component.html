@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <h2>Minhas Reviews</h2>
+  <mat-card class="p-3 mb-3">
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="row">
+
+        <div class="col-md-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Obra</mat-label>
+            <mat-select formControlName="obra" [compareWith]="compareObras">
+              <mat-option *ngFor="let o of obras" [value]="o">
+                {{ o.nome }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nota (0-10)</mat-label>
+            <input matInput type="number" formControlName="nota" min="0" max="10">
+          </mat-form-field>
+        </div>
+
+        <div class="col-12">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Título da Review</mat-label>
+            <input matInput formControlName="titulo" placeholder="Ex: Obra prima absoluta!">
+          </mat-form-field>
+        </div>
+
+        <div class="col-12">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Sua Análise</mat-label>
+            <textarea matInput formControlName="descricao" rows="3" placeholder="Escreva o que achou..."></textarea>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="d-flex justify-content-end gap-2">
+        <button *ngIf="editing" mat-button type="button" (click)="resetForm()" color="warn">Cancelar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ editing ? 'Atualizar' : 'Salvar' }}</button>
+      </div>
+    </form>
+  </mat-card>
+
+  <table class="table table-hover" *ngIf="dados.length > 0">
+    <thead>
+    <tr>
+      <th>Obra</th>
+      <th>Título</th> <th>Nota</th>
+      <th class="text-end">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of dados">
+      <td>{{ item.obra?.nome }}</td>
+      <td><strong>{{ item.titulo }}</strong><br><small class="text-muted">{{ item.descricao }}</small></td>
+      <td>{{ item.nota }}</td>
+      <td class="text-end">
+        <button mat-icon-button color="primary" (click)="editar(item)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="deletar(item.id!)"><mat-icon>delete</mat-icon></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

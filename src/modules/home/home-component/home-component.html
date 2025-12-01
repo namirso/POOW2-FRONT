@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <mat-toolbar color="primary" class="d-flex justify-content-between">
+    <span>REVIEWS</span>
+
+    <div class="nav-buttons">
+      <button mat-button routerLink="dashboard">
+        <mat-icon>home</mat-icon>
+        Home
+      </button>
+
+      <button mat-button routerLink="usuarios">
+        <mat-icon>person</mat-icon>
+        Usuários
+      </button>
+
+      <button mat-button routerLink="tipos">
+        <mat-icon>settings</mat-icon>
+        Tipos
+      </button>
+
+      <button mat-button routerLink="obras">
+        <mat-icon>tabs</mat-icon>
+        Obras
+      </button>
+
+      <button mat-button routerLink="reviews">
+        <mat-icon>reviews</mat-icon>
+        Reviews
+      </button>
+
+      <button mat-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Sair
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
